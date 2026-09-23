@@ -49,10 +49,9 @@ Tourists and newcomers in Kerala often don't know the **fair local market price*
 ## 📸 Screenshots
 
 ### 🖥️ Desktop View
-![Desktop Screenshot](hero.jpg)
+![Desktop Screenshot](desktop.jpg)
 
-### 📱 Mobile View
-> Clean 2-column card layout optimized for small screens
+
 
 ---
 
@@ -74,7 +73,7 @@ Tourists and newcomers in Kerala often don't know the **fair local market price*
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/todays-price.git
+   git clone https://github.com/Minhajvs/todays-price.git
    ```
 
 2. **Open the app**
@@ -82,18 +81,6 @@ Tourists and newcomers in Kerala often don't know the **fair local market price*
    Double-click index.html
    ```
    That's it! No server, no npm, no setup needed. ✅
-
-### Option 2 — Deploy online for free
-
-**Netlify Drop (No account needed):**
-1. Go to [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Drag and drop the project folder
-3. Get your live link instantly 🎉
-
-**GitHub Pages:**
-1. Push this repo to GitHub
-2. Go to `Settings → Pages → Branch: main → Save`
-3. Your link: `https://your-username.github.io/todays-price`
 
 ---
 
@@ -143,23 +130,6 @@ Contributions are welcome! If you know current Kerala market prices or want to a
 
 ---
 
-## ⚠️ Disclaimer
-
-Prices shown are **indicative** and based on average Kerala wholesale/retail market rates. Actual prices may vary by shop, location, season, and demand. Always verify with the seller.
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE) — free to use, share, and modify.
-
----
-
-## 👨‍💻 Author
-
-Made with ❤️ for **Kerala** 🌴
-
-> *"Knowledge is the best protection — know the price before you buy."*
 
 ---
 
