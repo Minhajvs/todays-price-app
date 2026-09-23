@@ -17,7 +17,6 @@
 </p>
 
 <p align="center">
-  <a href="https://https://tubular-crumble-f01a91.netlify.app">🔗 Live Demo</a> •
   <a href="#features">✨ Features</a> •
   <a href="#screenshots">📸 Screenshots</a> •
   <a href="#getting-started">🚀 Getting Started</a>
