@@ -49,7 +49,7 @@ Tourists and newcomers in Kerala often don't know the **fair local market price*
 ## 📸 Screenshots
 
 ### 🖥️ Desktop View
-![Desktop Screenshot](desktop.jpg)
+![Desktop Screenshot](desktop.png)
 
 
 
