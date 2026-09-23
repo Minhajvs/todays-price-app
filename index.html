@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Price | Kerala Market Prices</title>
+    <meta name="description" content="Check today's Kerala market prices for vegetables, fruits and daily groceries. Stay informed and shop smart in Kerala.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green:#1a6b3c;--green-dark:#0d4a28;--green-light:#2d8a54;
+            --green-pale:#e8f5ee;--saffron:#f7941d;--bg:#f2f7f4;
+            --card-bg:#ffffff;--text:#1c1c2e;--text-muted:#6b7280;
+            --border:#e2e8e4;--shadow-sm:0 2px 10px rgba(0,0,0,.06);
+            --shadow-md:0 6px 24px rgba(0,0,0,.10);--shadow-lg:0 12px 40px rgba(0,0,0,.16);
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+        img{display:block;}
+        button{cursor:pointer;font-family:inherit;border:none;background:none;}
+
+        /* HEADER */
+        .header{position:relative;background:linear-gradient(160deg,#0d4a28 0%,#1a6b3c 45%,#236644 100%);color:white;overflow:hidden;}
+        .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;filter:saturate(1.4);}
+        .header-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:24px 20px 28px;}
+        .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+        .brand{display:flex;align-items:center;gap:12px;}
+        .brand-icon{width:48px;height:48px;background:var(--saffron);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 14px rgba(247,148,29,.45);flex-shrink:0;}
+        .brand-text h1{font-size:1.35rem;font-weight:800;letter-spacing:-.4px;line-height:1.2;}
+        .brand-text p{font-size:.72rem;font-weight:400;opacity:.75;letter-spacing:.3px;}
+        .date-chip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:7px 14px;font-size:.72rem;font-weight:500;white-space:nowrap;}
+        .date-chip .dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:blink 2s ease-in-out infinite;}
+        @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+        /* SEARCH */
+        .search-wrap{position:relative;max-width:580px;}
+        .search-input{width:100%;padding:15px 52px 15px 22px;border-radius:50px;border:none;outline:none;font-family:'Poppins',sans-serif;font-size:.93rem;color:var(--text);background:rgba(255,255,255,.97);box-shadow:0 6px 30px rgba(0,0,0,.25);transition:box-shadow .2s ease;}
+        .search-input::placeholder{color:#9ca3af;}
+        .search-input:focus{box-shadow:0 8px 36px rgba(0,0,0,.32);}
+        .search-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:38px;height:38px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(26,107,60,.45);transition:background .2s;}
+        .search-btn:hover{background:var(--green-light);}
+        .search-btn svg{width:16px;height:16px;fill:none;stroke:white;stroke-width:2.2;stroke-linecap:round;}
+
+        /* MAIN */
+        .main{max-width:1100px;margin:0 auto;padding:24px 16px 60px;}
+
+        /* TABS */
+        .tabs{display:flex;gap:10px;margin-bottom:22px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+        .tabs::-webkit-scrollbar{display:none;}
+        .tab{display:flex;align-items:center;gap:7px;padding:10px 20px;border-radius:50px;border:2px solid var(--border);background:white;font-size:.83rem;font-weight:500;color:var(--text-muted);white-space:nowrap;transition:all .25s ease;box-shadow:var(--shadow-sm);}
+        .tab:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px);}
+        .tab.active{background:var(--green);border-color:var(--green);color:white;box-shadow:0 4px 18px rgba(26,107,60,.38);}
+
+        /* STATUS */
+        .statusbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+        .live-tag{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--green);}
+        .live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6);}50%{box-shadow:0 0 0 5px rgba(34,197,94,0);}}
+        .count-tag{font-size:.78rem;color:var(--text-muted);font-weight:500;background:white;padding:4px 12px;border-radius:50px;border:1px solid var(--border);}
+
+        /* GRID */
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:16px;}
+
+        /* CARD */
+        .card{background:var(--card-bg);border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .25s ease,box-shadow .25s ease;animation:fadeUp .4s ease both;}
+        .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+        .card-img-wrap{position:relative;height:148px;background:linear-gradient(135deg,#e8f5ee,#d1ead9);overflow:hidden;}
+        .card-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+        .card:hover .card-img{transform:scale(1.06);}
+        .cat-badge{position:absolute;top:8px;left:8px;padding:3px 9px;border-radius:50px;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;}
+        .cat-vegetable{background:#dcfce7;color:#15803d;}
+        .cat-fruit{background:#ffe4e6;color:#be123c;}
+        .cat-grocery{background:#fef3c7;color:#b45309;}
+        .card-body{padding:12px 14px 14px;}
+        .card-name{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:1px;}
+        .card-ml{font-size:.68rem;color:var(--text-muted);font-weight:400;margin-bottom:10px;}
+        .price-row{display:flex;align-items:baseline;gap:6px;}
+        .rupee-symbol{font-size:.8rem;font-weight:600;color:var(--green);line-height:1;}
+        .price-val{font-size:1.45rem;font-weight:800;color:var(--green);line-height:1;}
+        .price-unit{font-size:.66rem;color:var(--text-muted);font-weight:500;}
+        .price-range{margin-top:6px;font-size:.67rem;color:var(--text-muted);display:flex;align-items:center;gap:4px;}
+        .range-bar{flex:1;height:3px;background:#e5e7eb;border-radius:99px;overflow:hidden;position:relative;}
+        .range-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(to right,#86efac,var(--saffron));border-radius:99px;}
+
+        /* NO RESULTS */
+        .no-results{display:none;flex-direction:column;align-items:center;justify-content:center;padding:70px 20px;text-align:center;color:var(--text-muted);}
+        .no-results .nr-icon{font-size:3.5rem;margin-bottom:16px;opacity:.4;}
+        .no-results h3{font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:6px;}
+        .no-results p{font-size:.83rem;}
+
+        /* FOOTER */
+        .footer{background:#111827;color:rgba(255,255,255,.55);text-align:center;padding:24px 20px;font-size:.73rem;line-height:1.8;}
+        .footer strong{color:var(--saffron);}
+
+        /* RESPONSIVE */
+        @media(max-width:600px){
+            .header-inner{padding:18px 14px 22px;}
+            .brand-text h1{font-size:1.15rem;}
+            .date-chip{font-size:.67rem;padding:5px 10px;}
+            .grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+            .card-img-wrap{height:118px;}
+            .price-val{font-size:1.2rem;}
+        }
+        @media(min-width:900px){
+            .grid{grid-template-columns:repeat(auto-fill,minmax(195px,1fr));}
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <img src="hero.jpg" alt="Kerala Market Fresh Produce" class="hero-img" loading="eager">
+    <div class="header-inner">
+        <div class="topbar">
+            <div class="brand">
+                <div class="brand-icon">&#127807;</div>
+                <div class="brand-text">
+                    <h1>Today's Price</h1>
+                    <p>Kerala Market &mdash; Live Prices</p>
+                </div>
+            </div>
+            <div class="date-chip">
+                <span class="dot"></span>
+                <span id="dateLabel">Loading&hellip;</span>
+            </div>
+        </div>
+        <div class="search-wrap">
+            <input id="searchInput" type="text" class="search-input"
+                placeholder="Search vegetables, fruits, groceries&hellip;"
+                autocomplete="off" spellcheck="false">
+            <button class="search-btn" aria-label="Search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="tabs" id="tabs" role="tablist">
+        <button class="tab active" data-cat="all" role="tab" aria-selected="true"><span>&#128Shopping Cart&#x1F6D2;</span> All Items</button>
+        <button class="tab" data-cat="vegetable" role="tab" aria-selected="false">&#129382; Vegetables</button>
+        <button class="tab" data-cat="fruit" role="tab" aria-selected="false">&#127822; Fruits</button>
+        <button class="tab" data-cat="grocery" role="tab" aria-selected="false">&#127806; Groceries</button>
+    </div>
+    <div class="statusbar">
+        <div class="live-tag"><span class="live-dot"></span>Today's Market Price</div>
+        <span class="count-tag" id="itemCount">38 items</span>
+    </div>
+    <div class="grid" id="productGrid" role="list"></div>
+    <div class="no-results" id="noResults" role="alert">
+        <div class="nr-icon">&#128269;</div>
+        <h3>No products found</h3>
+        <p>Try a different name &mdash; in English or Malayalam</p>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>&#9888;&#65039; Prices are indicative and may vary slightly by shop, season, and location.</p>
+    <p>Prices updated regularly based on Kerala wholesale market rates.</p>
+    <p style="margin-top:8px;">Built with &#10084;&#65039; for <strong>Kerala</strong> &#127796; | Shop smart, save more.</p>
+</footer>
+
+<script>
+"use strict";
+const PRODUCTS=[
+    {id:1,name:"Tomato",ml:"തക്കാളി",cat:"vegetable",price:30,min:20,max:42,unit:"per kg",img:"https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:2,name:"Onion",ml:"ഉള്ളി",cat:"vegetable",price:28,min:20,max:38,unit:"per kg",img:"https://images.unsplash.com/photo-1508747703725-719777637510?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:3,name:"Potato",ml:"ഉരുളക്കിഴങ്ങ്",cat:"vegetable",price:24,min:18,max:34,unit:"per kg",img:"https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:4,name:"Carrot",ml:"കാരറ്റ്",cat:"vegetable",price:52,min:40,max:68,unit:"per kg",img:"https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:5,name:"Cabbage",ml:"കാബേജ്",cat:"vegetable",price:20,min:14,max:30,unit:"per kg",img:"https://images.unsplash.com/photo-1596711273027-df4bf41df7c8?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:6,name:"Beans",ml:"ബീൻസ്",cat:"vegetable",price:60,min:48,max:80,unit:"per kg",img:"https://images.unsplash.com/photo-1567306301408-9b74779a11af?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:7,name:"Bitter Gourd",ml:"പാവൽ",cat:"vegetable",price:48,min:36,max:65,unit:"per kg",img:"https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:8,name:"Brinjal",ml:"വഴുതന",cat:"vegetable",price:34,min:24,max:48,unit:"per kg",img:"https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:9,name:"Ladies Finger",ml:"വെണ്ടക്ക",cat:"vegetable",price:52,min:40,max:70,unit:"per kg",img:"https://images.unsplash.com/photo-1628773822503-930a7eaecf80?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:10,name:"Drumstick",ml:"മുരിങ്ങക്ക",cat:"vegetable",price:42,min:30,max:60,unit:"per kg",img:"https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:11,name:"Green Chilli",ml:"പച്ചമുളക്",cat:"vegetable",price:72,min:55,max:95,unit:"per kg",img:"https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:12,name:"Ginger",ml:"ഇഞ്ചി",cat:"vegetable",price:105,min:80,max:135,unit:"per kg",img:"https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:13,name:"Garlic",ml:"വെള്ളുള്ളി",cat:"vegetable",price:125,min:90,max:165,unit:"per kg",img:"https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:14,name:"Cucumber",ml:"വെള്ളരി",cat:"vegetable",price:24,min:16,max:34,unit:"per kg",img:"https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:15,name:"Snake Gourd",ml:"പടവലം",cat:"vegetable",price:28,min:20,max:40,unit:"per kg",img:"https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:16,name:"Raw Banana",ml:"കദളിക്ക",cat:"vegetable",price:35,min:25,max:50,unit:"per kg",img:"https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:17,name:"Nendran Banana",ml:"നേന്ത്രപ്പഴം",cat:"fruit",price:70,min:55,max:90,unit:"per kg",img:"https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:18,name:"Mango",ml:"മാമ്പഴം",cat:"fruit",price:100,min:70,max:150,unit:"per kg",img:"https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:19,name:"Papaya",ml:"പപ്പായ",cat:"fruit",price:25,min:18,max:36,unit:"per kg",img:"https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:20,name:"Pineapple",ml:"കൈതച്ചക്ക",cat:"fruit",price:42,min:30,max:65,unit:"per piece",img:"https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:21,name:"Coconut",ml:"തേങ്ങ",cat:"fruit",price:30,min:22,max:42,unit:"per piece",img:"https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:22,name:"Watermelon",ml:"തണ്ണിമത്തൻ",cat:"fruit",price:22,min:14,max:32,unit:"per kg",img:"https://images.unsplash.com/photo-1582984969071-a8da5656c2fb?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:23,name:"Apple",ml:"ആപ്പിൾ",cat:"fruit",price:130,min:100,max:175,unit:"per kg",img:"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:24,name:"Grapes",ml:"മുന്തിരി",cat:"fruit",price:80,min:60,max:105,unit:"per kg",img:"https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:25,name:"Pomegranate",ml:"മാതളം",cat:"fruit",price:105,min:80,max:135,unit:"per kg",img:"https://images.unsplash.com/photo-1615485736328-f376d7a9e2cc?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:26,name:"Guava",ml:"പേര",cat:"fruit",price:40,min:28,max:58,unit:"per kg",img:"https://images.unsplash.com/photo-1536511132770-e5058c7e8c46?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:27,name:"Orange",ml:"ഓറഞ്ച്",cat:"fruit",price:80,min:60,max:110,unit:"per kg",img:"https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:28,name:"Rice (Jyothi)",ml:"ജ്യോതി അരി",cat:"grocery",price:45,min:38,max:54,unit:"per kg",img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:29,name:"Coconut Oil",ml:"വെളിച്ചെണ്ണ",cat:"grocery",price:192,min:175,max:215,unit:"per litre",img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:30,name:"Sugar",ml:"പഞ്ചസാര",cat:"grocery",price:42,min:38,max:48,unit:"per kg",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:31,name:"Toor Dal",ml:"തുവരപ്പരിപ്പ്",cat:"grocery",price:100,min:85,max:118,unit:"per kg",img:"https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:32,name:"Wheat Flour",ml:"ഗോതമ്പ് മാവ്",cat:"grocery",price:40,min:34,max:50,unit:"per kg",img:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:33,name:"Salt",ml:"ഉപ്പ്",cat:"grocery",price:18,min:14,max:24,unit:"per kg",img:"https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:34,name:"Mustard Seeds",ml:"കടുക്",cat:"grocery",price:72,min:58,max:90,unit:"per kg",img:"https://images.unsplash.com/photo-1599909533731-cd4b21f9b04f?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:35,name:"Red Chilli Powder",ml:"മുളകുപൊടി",cat:"grocery",price:200,min:160,max:245,unit:"per kg",img:"https://images.unsplash.com/photo-1595475207225-428b62bda831?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:36,name:"Turmeric Powder",ml:"മഞ്ഞൾപ്പൊടി",cat:"grocery",price:150,min:120,max:185,unit:"per kg",img:"https://images.unsplash.com/photo-1615485291234-9d694218aeb3?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:37,name:"Urad Dal",ml:"ഉഴുന്ന്",cat:"grocery",price:90,min:75,max:112,unit:"per kg",img:"https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop&auto=format&q=80"},
+    {id:38,name:"Groundnut Oil",ml:"നിലക്കടല എണ്ണ",cat:"grocery",price:160,min:145,max:185,unit:"per litre",img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=300&fit=crop&auto=format&q=80"}
+];
+
+let activeCategory="all",searchQuery="";
+
+function setDate(){
+    const opts={weekday:"short",day:"numeric",month:"short",year:"numeric"};
+    document.getElementById("dateLabel").textContent=new Date().toLocaleDateString("en-IN",opts);
+}
+
+function getCatMeta(cat){
+    return{vegetable:{label:"Vegetable",cls:"cat-vegetable"},fruit:{label:"Fruit",cls:"cat-fruit"},grocery:{label:"Grocery",cls:"cat-grocery"}}[cat];
+}
+
+function rangePercent(price,min,max){
+    const pct=Math.round(((price-min)/(max-min))*100);
+    return Math.max(10,Math.min(90,pct));
+}
+
+function filtered(){
+    const q=searchQuery.trim().toLowerCase();
+    return PRODUCTS.filter(p=>
+        (activeCategory==="all"||p.cat===activeCategory)&&
+        (p.name.toLowerCase().includes(q)||p.ml.includes(searchQuery.trim()))
+    );
+}
+
+function buildCard(p,idx){
+    const meta=getCatMeta(p.cat);
+    const pct=rangePercent(p.price,p.min,p.max);
+    const fb="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&auto=format&q=80";
+    return `<article class="card" role="listitem" style="animation-delay:${idx*40}ms">
+        <div class="card-img-wrap">
+            <img class="card-img" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${fb}'">
+            <span class="cat-badge ${meta.cls}">${meta.label}</span>
+        </div>
+        <div class="card-body">
+            <div class="card-name">${p.name}</div>
+            <div class="card-ml">${p.ml}</div>
+            <div class="price-row">
+                <span class="rupee-symbol">&#8377;</span>
+                <span class="price-val">${p.price}</span>
+                <span class="price-unit">${p.unit}</span>
+            </div>
+            <div class="price-range">
+                <span>&#8377;${p.min}</span>
+                <div class="range-bar"><div class="range-fill" style="width:${pct}%"></div></div>
+                <span>&#8377;${p.max}</span>
+            </div>
+        </div>
+    </article>`;
+}
+
+function render(){
+    const list=filtered();
+    const grid=document.getElementById("productGrid");
+    const noResults=document.getElementById("noResults");
+    document.getElementById("itemCount").textContent=`${list.length} item${list.length!==1?"s":""}`;
+    if(list.length===0){
+        grid.innerHTML="";
+        noResults.style.display="flex";
+    }else{
+        noResults.style.display="none";
+        grid.innerHTML=list.map((p,i)=>buildCard(p,i)).join("");
+    }
+}
+
+document.getElementById("searchInput").addEventListener("input",e=>{
+    searchQuery=e.target.value;render();
+});
+
+document.getElementById("tabs").addEventListener("click",e=>{
+    const tab=e.target.closest(".tab");
+    if(!tab)return;
+    document.querySelectorAll(".tab").forEach(t=>{t.classList.remove("active");t.setAttribute("aria-selected","false");});
+    tab.classList.add("active");tab.setAttribute("aria-selected","true");
+    activeCategory=tab.dataset.cat;render();
+});
+
+setDate();render();
+</script>
+</body>
+</html>
